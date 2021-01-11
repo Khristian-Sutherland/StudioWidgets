@@ -16,7 +16,6 @@ LabeledTextInputClass.__index = LabeledTextInputClass
 function LabeledTextInputClass.new(nameSuffix, labelText, defaultValue)
 	local self = {}
 	setmetatable(self, LabeledTextInputClass)
-	self._defaultValue = defaultValue
 
 	-- Note: we are using "graphemes" instead of characters.
 	-- In modern text-manipulation-fu, what with internationalization, 
@@ -59,7 +58,6 @@ function LabeledTextInputClass.new(nameSuffix, labelText, defaultValue)
 	textBox.Size = UDim2.new(1, -kTextBoxInternalPadding, 1, GuiUtilities.kTextVerticalFudge)
 	textBox.Position = UDim2.new(0, kTextBoxInternalPadding, 0, 0)
 	textBox.ClipsDescendants = true
-	textBox.ClearTextOnFocus = false
 
 	GuiUtilities.syncGuiElementFontColor(textBox)
 	
@@ -121,16 +119,4 @@ function LabeledTextInputClass:SetValue(newValue)
 	end
 end
 
-function LabeledTextInputClass:GetTextBox() --gets the text box itself
-	return self._textBox
-end
-
-function LabeledTextInputClass:SetFocusLostFunction(funct) --sets the function that runs when focus is lost
-	self._textBox.FocusLost:Connect(funct)
-end
-
-function LabeledTextInputClass:SetDefaultValue(value) --sets the default value to something else
-	self._defaultValue = value
-end
- 
 return LabeledTextInputClass
