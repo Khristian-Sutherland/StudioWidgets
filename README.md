@@ -27,6 +27,7 @@ Members and methods of classes that begin with '_' are considered "private": sho
 
 * [CollapsibleTitledSection.lua](#collapsibletitledsectionlua)
 * [CustomTextButton.lua](#customtextbuttonlua)
+* [DropdownMenu.lua](#dropdownmenulua)
 * [GuiUtilities.lua](#customtextbuttonlua)
 * [ImageButtonWithText.lua](#imagebuttonwithtextlua)
 * [LabeledCheckbox.lua](#labeledcheckboxlua)
@@ -84,6 +85,56 @@ buttonObject.MouseButton1Click:Connect(function()
 end)
 
 buttonObject.Parent = widgetGui
+```
+
+#### DropdownMenu.lua
+A multi-choice menu containing an arbitrary number of buttons or "choices". Main button highlights appropriately on hover and click.
+
+![DropdownMenu](images/DropdownMenu.gif)
+```lua
+-- selections require 3 inputs: display text, value to return, and a unique identifier.
+-- display text and id must both be strings.
+-- id must be unique, or a warning will be thrown, and that selection will not be added.
+-- return value may be any value such as an int, number, string, bool, table, etc. 
+local selectionTable = {
+--  {"display text", "return value", "id"}
+	{"option 0", 0, "0"},
+	{"option 1", 1, "1"},
+	{"option 2", 2, "2"},
+}
+
+local dropdown = DropdownMenu.new(
+	"suffix", -- name suffix of gui object
+	"Label text", -- displayed label text
+	selectionTable -- table of selection data, optional
+)
+
+-- add selections after creation
+local newSelection = {"option 3", 3, "3"}
+dropdown:AddSelection(newSelection)
+
+-- remove selection with the given id
+dropdown:RemoveSelection("0")
+
+-- add selections from a table
+local moreSelections = {
+	{"option 4", 4, "4"},
+	{"option 5", 5, "5"},
+--	...
+	{"option infinity", "yay", "inf"}
+}
+dropdown:AddSelectionsFromTable(moreSelections)
+
+-- change the label text
+dropdown:ChangeLabel("New label text")
+
+-- reset the selected choice
+dropdown:ResetChoice()
+
+-- get the selected choice
+print(dropdown:GetChoice())
+
+dropdown:GetSectionFrame().Parent = widgetGui
 ```
 
 #### GuiUtilities.lua
