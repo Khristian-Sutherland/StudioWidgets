@@ -397,7 +397,7 @@ The easiest way to bring the project into studio is to use the [HttpService](htt
 
 ```Lua
 local http = game:GetService("HttpService")
-local req = http:GetAsync("https://api.github.com/repos/Roblox/StudioWidgets/contents/src")
+local req = http:GetAsync("https://api.github.com/repos/Khristian-Sutherland/StudioWidgets/contents/src")
 local json = http:JSONDecode(req)
 
 local targetFolder = Instance.new("Folder")
